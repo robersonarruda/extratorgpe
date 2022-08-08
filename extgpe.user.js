@@ -120,7 +120,7 @@ function iniciar(){
                         if(i==10){zeros="0"};
                         if(i==100){zeros=""};
                         vetServidor[i-1] = parent.frames[0].document.getElementById('span_GERPESCOD_0'+zeros+i).innerText.trim();
-                        if(i==linhas){ifrIframe1.removeEventListener("load", copyCodServ); coletar()};
+                        if(i==linhas){vetServidor = [...new Set(vetServidor)];ifrIframe1.removeEventListener("load", copyCodServ); coletar()};
                     }
                 }
                 else{alert("nenhum servidor localizado para o Tipo Selecionado")}
