@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name       Extrator Contatos GPE 3
 // @fullname      Extrator Contatos GPE 3
-// @version    3.3.0.0
+// @version    3.3.0.1
 // @description  Consulta e salva dados de contato dos Servidores do sigeduca.
 // @include	*sigeduca.seduc.mt.gov.br/grh/hwmgrhServidor.aspx*
 // @author       Roberson Arruda
@@ -167,7 +167,7 @@ function coletaDados() {
         if(parent.frames[0].document.getElementById('span_CTLGERPESCPF') !== null){
             dadosPessoal[n] = dadosPessoal[n] + parent.frames[0].document.getElementById('span_CTLGERPESCPF').innerHTML+";"; //span_CTLGERPESCPF CPF
         }
-        if(parent.frames[0].document.getElementById('CTLGERPESCPF') !== null){
+        else if(parent.frames[0].document.getElementById('CTLGERPESCPF') !== null){
             dadosPessoal[n] = dadosPessoal[n] + parent.frames[0].document.getElementById('CTLGERPESCPF').value+";"; //CTLGERPESCPF CPF
         }
         dadosPessoal[n] = dadosPessoal[n] + parent.frames[0].document.getElementById('CTLGERPESNOMMAE').value +";"; //Nome da mãe
