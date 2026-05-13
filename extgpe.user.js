@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name       Extrator Contatos GPE 3
 // @fullname      Extrator Contatos GPE 3
-// @version    3.4.0.0
+// @version    3.4.1.0
 // @description  Consulta e salva dados de contato dos Servidores do sigeduca.
 // @include	*sigeduca.seduc.mt.gov.br/grh/hwmgrhServidor.aspx*
 // @author       Roberson Arruda
@@ -9,6 +9,8 @@
 // @downloadURL   https://raw.githubusercontent.com/robersonarruda/extratorgpe/main/extgpe.user.js
 // @updateURL     https://raw.githubusercontent.com/robersonarruda/extratorgpe/main/extgpe.user.js
 // @copyright  2019, Roberson Arruda (robersonarruda@outlook.com)
+// @connect      raw.githubusercontent.com
+// @grant        GM_xmlhttpRequest
 // ==/UserScript==
 
 
@@ -426,4 +428,85 @@ span1 = document.createElement('span');
 span1.innerHTML = 'Extrator informações GPE';
 divCredito.appendChild(span1);
 
-window.scrollTo(0, document.body.scrollHeight);
+//Verificação de atualização
+async function verificarAtualizacao() {
+
+    const VERSAO_ATUAL = GM_info.script.version;
+    const URL_SCRIPT = GM_info.script.updateURL;
+
+    try {
+
+        GM_xmlhttpRequest({
+
+            method: 'GET',
+            url: URL_SCRIPT + '?t=' + Date.now(),
+
+            onload: function(resposta) {
+
+                const texto = resposta.responseText;
+
+                const match = texto.match(/@version\s+([0-9.]+)/);
+
+                if (!match) return;
+
+                const versaoRemota = match[1];
+
+                if (compararVersoes(versaoRemota, VERSAO_ATUAL) > 0) {
+
+                    if (!divCredito) return;
+
+                    const link = document.createElement('a');
+
+                    link.href = URL_SCRIPT;
+                    link.target = '_blank';
+
+                    link.style.color = 'red';
+                    link.style.fontWeight = 'bold';
+                    link.style.marginLeft = '10px';
+
+                    link.textContent =
+                        '>>Atualize para a versão ' + versaoRemota +'<<';
+
+                    br1 = document.createElement('br'); //quebra de linha
+                    span1.appendChild(br1);
+                    divCredito.appendChild(link);
+                }
+            },
+
+            onerror: function(erro) {
+
+                console.error(
+                    'Erro ao verificar atualização:',
+                    erro
+                );
+            }
+        });
+
+    } catch (erro) {
+
+        console.error(
+            'Erro geral:',
+            erro
+        );
+    }
+}
+
+function compararVersoes(v1, v2) {
+
+    const a = v1.split('.').map(Number);
+    const b = v2.split('.').map(Number);
+
+    const tamanho = Math.max(a.length, b.length);
+
+    for (let i = 0; i < tamanho; i++) {
+
+        const n1 = a[i] || 0;
+        const n2 = b[i] || 0;
+
+        if (n1 > n2) return 1;
+        if (n1 < n2) return -1;
+    }
+
+    return 0;
+}
+verificarAtualizacao()
