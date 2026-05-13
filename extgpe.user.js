@@ -6,8 +6,8 @@
 // @include	*sigeduca.seduc.mt.gov.br/grh/hwmgrhServidor.aspx*
 // @author       Roberson Arruda
 // @homepage      https://github.com/robersonarruda/extratorgpe/blob/main/extgpe.user.js
-// @downloadURL   https://github.com/robersonarruda/extratorgpe/raw/main/extgpe.user.js
-// @updateURL     https://github.com/robersonarruda/extratorgpe/raw/main/extgpe.user.js
+// @downloadURL   https://github.com/robersonarruda/extratorgpe/raw/refs/heads/main/extgpe.user.js
+// @updateURL     https://github.com/robersonarruda/extratorgpe/raw/refs/heads/main/extgpe.user.js
 // @copyright  2019, Roberson Arruda (robersonarruda@outlook.com)
 // ==/UserScript==
 
