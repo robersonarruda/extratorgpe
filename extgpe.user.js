@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name       Extrator Contatos GPE 3
 // @fullname      Extrator Contatos GPE 3
-// @version    3.3.5.1
+// @version    3.4.0.0
 // @description  Consulta e salva dados de contato dos Servidores do sigeduca.
 // @include	*sigeduca.seduc.mt.gov.br/grh/hwmgrhServidor.aspx*
 // @author       Roberson Arruda
@@ -122,6 +122,8 @@ function obterCodUnidade(){
 }
 
 function copyCodServ(){
+    //Força a exibição do gx_ajax_notification para o observador atuar quando ele sumir (pois às vezes ele não é exibido)
+    parent.frames[0].document.getElementById('gx_ajax_notification').style.display="block";
     // Função que será chamada quando o 'gx_ajax_notification' desaparecer
     function onElementHidden() {
         var tabela = parent.frames[0].document.getElementById('Grid1ContainerTbl');
@@ -135,6 +137,7 @@ function copyCodServ(){
                     vetServidor = vetServidor.filter(function(item) {return item !== ""; });
                     ifrIframe1.src= urlDadosIni+vetServidor[n]+urlDadosFim;
                     ifrIframe1.addEventListener("load", coletaDados);
+                    console.log("CHEGOU ATE AQUI");
                 }
             }
         } else {
@@ -328,6 +331,32 @@ var comboServ = document.getElementById("selServ");
     opt5.value = "5";
     opt5.text = "TAE EFETIVO";
     comboServ.add(opt5, comboServ.options[5]);
+
+    var opt6 = document.createElement("option");
+    opt6.value = "62";
+    opt6.text = "TEC.DES.ECON.SOCIAL-INTERINO";
+    comboServ.add(opt6, comboServ.options[6]);
+
+/*
+    var opt7 = document.createElement("option");
+    opt7.value = "62";
+    opt7.text = "TEC.DES.ECON.SOCIAL-INTERINO";
+    comboServ.add(opt7, comboServ.options[7]); */
+
+    var opt8 = document.createElement("option");
+    opt8.value = "91";
+    opt8.text = "MONITOR (CIVICO-MILITAR)";
+    comboServ.add(opt8, comboServ.options[8]);
+
+    var opt9 = document.createElement("option");
+    opt9.value = "75";
+    opt9.text = "APOIO TECNICO ESP CIVICO MILITAR 01";
+    comboServ.add(opt9, comboServ.options[9]);
+
+    var opt10 = document.createElement("option");
+    opt10.value = "76";
+    opt10.text = "APOIO TECNICO ESP CIVICO MILITAR 02";
+    comboServ.add(opt10, comboServ.options[10]);
 
 br1 = document.createElement("br");//Quebra de linha
 divCorpo.appendChild(br1); //Quebra de linha
